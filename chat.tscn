@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://btv7qh2hoib2v"]
+
+[node name="Chat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -641.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Submits the entire current script in the editor for code analysis by the loaded model. Response returns in the chat window."
+
+[node name="main_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="chat_display" type="RichTextLabel" parent="main_container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+bbcode_enabled = true
+scroll_following = true
+selection_enabled = true
+
+[node name="chat_interface" type="HBoxContainer" parent="main_container"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_constants/separation = 5
+
+[node name="chat_input" type="TextEdit" parent="main_container/chat_interface"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 11.0
+focus_neighbor_right = NodePath("../chat_button")
+focus_mode = 1
+theme_override_colors/font_color = Color(0.92549, 0.513726, 0.0509804, 1)
+
+[node name="chat_button" type="Button" parent="main_container/chat_interface" groups=["chat_dock_buttons"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Send text to the loaded model."
+text = "Chat"
+
+[node name="chat_options" type="VBoxContainer" parent="main_container/chat_interface"]
+layout_mode = 2
+
+[node name="include_script_toggle" type="CheckBox" parent="main_container/chat_interface/chat_options"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Attach Current Script to Chat"
+
+[node name="include_selected_text_toggle" type="CheckBox" parent="main_container/chat_interface/chat_options"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Attach Selected Text to Chat"
+
+[node name="action_buttons" type="HBoxContainer" parent="main_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="button_layer" type="VBoxContainer" parent="main_container/action_buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="first_layer" type="HBoxContainer" parent="main_container/action_buttons/button_layer"]
+layout_mode = 2
+
+[node name="Script_Analysis" type="Button" parent="main_container/action_buttons/button_layer/first_layer" groups=["chat_dock_buttons"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Sends the current script to the model for analysis and asks for at least 3 optimizations. Displays answer in chat and saves the model response in the MODEL_RESPONSE directory as Markdown with date and time as file name."
+text = "Analyze Current Script"
+
+[node name="Action" type="Button" parent="main_container/action_buttons/button_layer/first_layer" groups=["chat_dock_buttons"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Submits a selected text code generation prompt to the model from the script editor. Response returns in script editor at the cursor position."
+text = "Action"
+
+[node name="Help" type="Button" parent="main_container/action_buttons/button_layer/first_layer" groups=["chat_dock_buttons"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Sends highlighted code to the model with a troubleshooting request. Response returns in chat."
+text = "Help"
+
+[node name="Optimize" type="Button" parent="main_container/action_buttons/button_layer/first_layer" groups=["chat_dock_buttons"]]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Sends highlighted text to model for optimization. Returns response in script editor. Does not delete submitted code."
+text = "Optimize"
+
+[node name="Comment" type="Button" parent="main_container/action_buttons/button_layer/first_layer" groups=["chat_dock_buttons"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Sends the highlighted text to the model for a short comment."
+text = "Comment Code"
+
+[node name="second_layer" type="HBoxContainer" parent="main_container/action_buttons/button_layer"]
+visible = false
+layout_mode = 2
